@@ -11,6 +11,7 @@ REMOTE_DIR="/share/CACHEDEV1_DATA/data/mute"
 PREFIX="MUTE_MACH1_"
 OUTDIR="."
 SCRIPTS_DIR=""
+TRADUCCION_SCRIPT=""
 DATE_STR=""
 
 PYTHON_BIN="python3"
@@ -62,6 +63,60 @@ run_step() {
   echo "[$(ts)] <== OK: $title (elapsed $(fmt_time "$dt"))"
 }
 
+# -----------------------
+# CSV translation helpers
+# -----------------------
+translate_list_csvs_in_cwd() {
+  # Traduce todos los *_list.csv (shaping) a *_as_MuTe.csv (wide ch00..ch63)
+  shopt -s nullglob
+  local files=( *_list.csv )
+  if (( ${#files[@]} == 0 )); then
+    echo "[$(ts)] No hay *_list.csv para traducir en $(pwd)"
+    return 0
+  fi
+  for f in "${files[@]}"; do
+    [[ "$f" == *_as_MuTe.csv ]] && continue
+    echo "[$(ts)]   -> traduccionMuTe.py: $f"
+    "$PYTHON_BIN" "$TRADUCCION_SCRIPT" "$f"
+  done
+}
+
+delete_list_csvs_in_cwd() {
+  # Borra solo los CSV originales en formato *_list.csv (los shaping)
+  shopt -s nullglob
+  local files=( *_list.csv )
+  if (( ${#files[@]} == 0 )); then
+    echo "[$(ts)] No hay *_list.csv para borrar en $(pwd)"
+    return 0
+  fi
+  rm -f -- "${files[@]}"
+}
+
+
+# -----------------------
+# CSV ordering helpers
+# -----------------------
+sort_csv_by_time_in_place() {
+  # Ordena por la primera columna (timestamp ISO en 'time') preservando header.
+  # Para formato YYYY-MM-DD HH:MM:SS.sssssssss, orden lexicográfico == orden temporal.
+  local f="$1"
+  [[ -f "$f" ]] || die "No existe CSV para ordenar: $f"
+
+  local dir base tmp
+  dir="$(dirname -- "$f")"
+  base="$(basename -- "$f")"
+  tmp="$dir/.${base}.tmp_sort"
+
+  # Preserva header y ordena resto por columna 1 separada por coma
+  {
+    head -n 1 -- "$f"
+    tail -n +2 -- "$f" | LC_ALL=C sort -t',' -k1,1
+  } > "$tmp"
+
+  [[ -s "$tmp" ]] || die "El ordenamiento produjo archivo vacío: $tmp"
+  mv -f -- "$tmp" "$f"
+}
+
 usage() {
   cat <<EOF
 Uso:
@@ -69,7 +124,7 @@ Uso:
 
 Requeridos:
   --date YYYYMMDD
-  --scriptsdir PATH   (donde están unircsv.py y filtro_coincidencias.py)
+  --scriptsdir PATH   (donde están unircsv.py, traduccionMuTe.py y filtro_coincidencias.py)
 
 Opciones:
   --outdir PATH
@@ -77,6 +132,7 @@ Opciones:
   --remotedir PATH
   --prefix STR
   --python PATH
+  --traduccion PATH   (ruta a traduccionMuTe.py; defecto: scriptsdir/traduccionMuTe.py)
   --port N
   --identity PATH
   --retries N
@@ -97,6 +153,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --date)        DATE_STR="${2:-}"; shift 2 ;;
     --scriptsdir)  SCRIPTS_DIR="${2:-}"; shift 2 ;;
+    --traduccion) TRADUCCION_SCRIPT="${2:-}"; shift 2 ;;
     --outdir)      OUTDIR="${2:-}"; shift 2 ;;
     --userhost)    USER_HOST="${2:-}"; shift 2 ;;
     --remotedir)   REMOTE_DIR="${2:-}"; shift 2 ;;
@@ -122,6 +179,10 @@ if [[ -z "${SCRIPTS_DIR}" ]]; then
   SCRIPTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
+if [[ -z "${TRADUCCION_SCRIPT}" ]]; then
+  TRADUCCION_SCRIPT="$SCRIPTS_DIR/traduccionMuTe.py"
+fi
+
 # -----------------------
 # Validations
 # -----------------------
@@ -131,6 +192,7 @@ fi
 [[ -d "$SCRIPTS_DIR" ]] || die "--scriptsdir no existe: $SCRIPTS_DIR"
 [[ -f "$SCRIPTS_DIR/unircsv.py" ]] || die "No encuentro $SCRIPTS_DIR/unircsv.py"
 [[ -f "$SCRIPTS_DIR/filtro_coincidencias.py" ]] || die "No encuentro $SCRIPTS_DIR/filtro_coincidencias.py"
+[[ -f "$TRADUCCION_SCRIPT" ]] || die "No encuentro traduccionMuTe.py: $TRADUCCION_SCRIPT (usa --traduccion PATH)"
 
 mkdir -p "$OUTDIR"
 
@@ -174,6 +236,7 @@ echo "  user@host    : $USER_HOST"
 echo "  remote dir   : $REMOTE_DIR"
 echo "  pattern name : $PATTERN"
 echo "  scripts dir  : $SCRIPTS_DIR"
+echo "  traduccion   : $TRADUCCION_SCRIPT"
 echo "  outdir       : $(cd "$OUTDIR" && pwd)"
 echo
 
@@ -310,10 +373,19 @@ if [[ "$SKIP_PYTHON" -eq 0 ]]; then
   (
     cd "$OUTDIR"
 
+    run_step "Ejecutando traduccionMuTe.py en *_list.csv (carpeta=.)" \
+      translate_list_csvs_in_cwd
+
+    run_step "Borrando CSV originales (*_list.csv)" \
+      delete_list_csvs_in_cwd
+
     run_step "Ejecutando unircsv.py (carpeta=.)" \
       "$PYTHON_BIN" "$SCRIPTS_DIR/unircsv.py" -o "$CONCAT_NAME" .
 
     [[ -s "$CONCAT_NAME" ]] || die "No se generó $OUTDIR/$CONCAT_NAME (revisa salida de unircsv.py)"
+
+    run_step "Ordenando temporalmente $CONCAT_NAME por columna time" \
+      sort_csv_by_time_in_place "$CONCAT_NAME"
 
     run_step "Ejecutando filtro_coincidencias.py (input=$CONCAT_NAME)" \
       "$PYTHON_BIN" "$SCRIPTS_DIR/filtro_coincidencias.py" "$CONCAT_NAME"
