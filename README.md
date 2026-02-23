@@ -212,21 +212,21 @@ Para que se vean en GitHub, este README asume que copiaste algunos PNGs de
 `graficas_*/` a una carpeta `images/` dentro del repo (o ajusta las rutas).
 
 ### Flujo 4-fold vs tiempo
-![4-fold flux](images/flujo_4fold_tiempo.png)
+![4-fold flux](imagenes/flujo_4fold_tiempo.png)
 
 ### Histograma del flujo 4-fold
-![Histogram 4-fold flux](images/histograma_flux_4fold.png)
+![Histogram 4-fold flux](imagenes/histograma_flux_4fold.png)
 
 ### Mapa de píxeles (Δx,Δy)
-![Pixel map](images/mapa_pixeles_delta_xy.png)
+![Pixel map](imagenes/mapa_pixeles_delta_xy.png)
 
 ### Tasa por canal (rolling) y diagnósticos
-![CPS rolling](images/archivo_concatenado_cps_rolling.png)
-![Deviation histogram](images/archivo_concatenado_desviacion_media.png)
-![Multiplicity](images/archivo_concatenado_multiplicidad_eventos.png)
+![CPS rolling](imagenes/archivo_concatenado_cps_rolling.png)
+![Deviation histogram](imagenes/archivo_concatenado_desviacion_media.png)
+![Multiplicity](imagenes/archivo_concatenado_multiplicidad_eventos.png)
 
 ### Heatmap de coincidencias por activación (ejemplo)
-![Heatmap log coincidences panel 1](images/heatmap_coincidencias_log_panel1.png)
+![Heatmap log coincidences panel 1](imagenes/heatmap_coincidencias_log_panel1.png)
 
 ---
 
