@@ -296,6 +296,18 @@ if [[ -n "$IDENTITY_FILE" ]]; then
   SCP_OPTS+=(-i "$IDENTITY_FILE")
 fi
 
+# -----------------------
+# SSH multiplexing (1 password por corrida con auth por password)
+# Recomendado: configurar llaves SSH; esto solo evita pedir password en cada scp/ssh.
+# -----------------------
+CONTROL_DIR="${HOME}/.ssh/cm"
+mkdir -p "$CONTROL_DIR"
+chmod 700 "$CONTROL_DIR" 2>/dev/null || true
+CONTROL_PATH="${CONTROL_DIR}/mute-%r@%h:%p"
+
+SSH_OPTS+=(-o ControlMaster=auto -o ControlPersist=10m -o ControlPath="$CONTROL_PATH")
+SCP_OPTS+=(-o ControlMaster=auto -o ControlPersist=10m -o ControlPath="$CONTROL_PATH")
+
 SSH_BIN=(ssh "${SSH_OPTS[@]}")
 SCP_BIN=(scp "${SCP_OPTS[@]}")
 
@@ -304,6 +316,33 @@ if command -v sshpass >/dev/null 2>&1 && [[ -n "${SSHPASS:-}" ]]; then
   SSH_BIN=(sshpass -e "${SSH_BIN[@]}")
   SCP_BIN=(sshpass -e "${SCP_BIN[@]}")
 fi
+
+open_mux_master() {
+  # Abre un master connection para que scp/ssh reusen la sesión y no pidan password por archivo.
+  # Pedirá password UNA sola vez aquí si usas autenticación por contraseña.
+  [[ "$DRY_RUN" -eq 1 ]] && return 0
+
+  # Si ya existe master, no hacemos nada.
+  if ssh -o ControlPath="$CONTROL_PATH" -O check "$USER_HOST" >/dev/null 2>&1; then
+    return 0
+  fi
+
+  echo "[$(ts)] ==> Abriendo conexión SSH multiplexada (pedirá clave solo una vez)"
+  local cmd=(ssh "${SSH_OPTS[@]}" -o ControlMaster=yes -o ControlPersist=10m -o ControlPath="$CONTROL_PATH" -Nf "$USER_HOST")
+  if command -v sshpass >/dev/null 2>&1 && [[ -n "${SSHPASS:-}" ]]; then
+    cmd=(sshpass -e "${cmd[@]}")
+  fi
+  "${cmd[@]}" || die "No pude abrir master SSH"
+}
+
+close_mux_master() {
+  [[ "$DRY_RUN" -eq 1 ]] && return 0
+  ssh -o ControlPath="$CONTROL_PATH" -O exit "$USER_HOST" >/dev/null 2>&1 || true
+}
+
+# Cierra el master al terminar (incluso si Ctrl+C)
+trap close_mux_master EXIT
+
 
 PATTERN="${PREFIX}${DATE_STR}*.tar.xz"
 
@@ -341,6 +380,7 @@ EOS
 
 remote_files=()
 if [[ "$SKIP_DOWNLOAD" -eq 0 ]]; then
+  open_mux_master
   echo "[$(ts)] ==> Chequeando acceso remoto (ssh) y listando archivos"
   if [[ "$DRY_RUN" -eq 1 ]]; then
     echo "[$(ts)] [DRY-RUN] ssh list"
