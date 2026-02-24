@@ -66,32 +66,108 @@ run_step() {
 # -----------------------
 # CSV translation helpers
 # -----------------------
-translate_list_csvs_in_cwd() {
-  # Traduce todos los *_list.csv (shaping) a *_as_MuTe.csv (wide ch00..ch63)
+is_shaping_csv() {
+  # Heurística: los CSV Janus/FERS (shaping) empiezan con líneas de comentario '//'
+  local f="$1"
+  [[ -f "$f" ]] || return 1
+  local first
+  first="$(grep -m1 -v '^[[:space:]]*$' "$f" 2>/dev/null | head -n 1 || true)"
+  [[ $first == //* ]]
+}
+
+translate_shaping_csvs_in_cwd() {
+  # Traduce todos los CSV shaping (que empiezan con //) a *_as_MuTe.csv (wide ch00..ch63)
   shopt -s nullglob
-  local files=( *_list.csv )
+  local files=( *.csv )
   if (( ${#files[@]} == 0 )); then
-    echo "[$(ts)] No hay *_list.csv para traducir en $(pwd)"
+    echo "[$(ts)] No hay CSV en $(pwd)"
     return 0
   fi
   for f in "${files[@]}"; do
     [[ "$f" == *_as_MuTe.csv ]] && continue
-    echo "[$(ts)]   -> traduccionMuTe.py: $f"
-    "$PYTHON_BIN" "$TRADUCCION_SCRIPT" "$f"
+    [[ "$f" == "archivo_concatenado.csv" ]] && continue
+    if is_shaping_csv "$f"; then
+      echo "[$(ts)]   -> traduccionMuTe.py: $f"
+      # Output determinista: mismo nombre base + _as_MuTe.csv
+      "$PYTHON_BIN" "$TRADUCCION_SCRIPT" "$f" -o "${f%.csv}_as_MuTe.csv"
+    fi
   done
 }
 
-delete_list_csvs_in_cwd() {
-  # Borra solo los CSV originales en formato *_list.csv (los shaping)
+delete_shaping_csvs_in_cwd() {
+  # Borra solo los CSV Janus/FERS (shaping) que empiezan con //
   shopt -s nullglob
-  local files=( *_list.csv )
-  if (( ${#files[@]} == 0 )); then
-    echo "[$(ts)] No hay *_list.csv para borrar en $(pwd)"
-    return 0
-  fi
-  rm -f -- "${files[@]}"
+  local files=( *.csv )
+  local removed=0
+  for f in "${files[@]}"; do
+    [[ "$f" == *_as_MuTe.csv ]] && continue
+    [[ "$f" == "archivo_concatenado.csv" ]] && continue
+    if is_shaping_csv "$f"; then
+      rm -f -- "$f"
+      removed=$((removed+1))
+    fi
+  done
+  echo "[$(ts)] Borré $removed CSV shaping (si había)."
 }
 
+rename_extracted_for_archive() {
+  # Renombra los archivos extraídos para que coincidan con el nombre del .tar.xz:
+  #   MUTE_MACH1_YYYYMMDD_03h00m12s.tar.xz  ->  MUTE_MACH1_YYYYMMDD_03h00m12s.csv (y .txt si existe)
+  local archive="$1"
+  local outdir="$2"
+
+  local base stem
+  base="$(basename -- "$archive")"
+  stem="${base%.tar.xz}"
+
+  mapfile -t members < <(tar -tf "$archive" | sed 's|^\./||' | sed '/\/$/d') || true
+
+  local csvs=() txts=()
+  local m
+  for m in "${members[@]}"; do
+    [[ "$m" == *.csv ]] && csvs+=("$m")
+    [[ "$m" == *.txt ]] && txts+=("$m")
+  done
+
+  # Si hay más de un CSV/TXT en el tar, se enumeran _2, _3, ...
+  local i=0 src dest
+  for m in "${csvs[@]}"; do
+    i=$((i+1))
+    src="$outdir/$m"
+    [[ -f "$src" ]] || continue
+    if [[ "$i" -eq 1 ]]; then
+      dest="$outdir/$stem.csv"
+    else
+      dest="$outdir/${stem}_$i.csv"
+    fi
+    if [[ -f "$dest" && "$FORCE" -eq 0 ]]; then
+      echo "[$(ts)] Ya existe: $dest (usa --force). No renombro $src"
+    else
+      mkdir -p -- "$(dirname -- "$dest")"
+      mv -f -- "$src" "$dest"
+      echo "[$(ts)] Renombré: $src -> $dest"
+    fi
+  done
+
+  i=0
+  for m in "${txts[@]}"; do
+    i=$((i+1))
+    src="$outdir/$m"
+    [[ -f "$src" ]] || continue
+    if [[ "$i" -eq 1 ]]; then
+      dest="$outdir/$stem.txt"
+    else
+      dest="$outdir/${stem}_$i.txt"
+    fi
+    if [[ -f "$dest" && "$FORCE" -eq 0 ]]; then
+      echo "[$(ts)] Ya existe: $dest (usa --force). No renombro $src"
+    else
+      mkdir -p -- "$(dirname -- "$dest")"
+      mv -f -- "$src" "$dest"
+      echo "[$(ts)] Renombré: $src -> $dest"
+    fi
+  done
+}
 
 # -----------------------
 # CSV ordering helpers
@@ -353,6 +429,7 @@ if [[ "$SKIP_EXTRACT" -eq 0 ]]; then
     [[ -f "$f" ]] || die "No existe para extraer: $f"
     tar_safe_check "$f" || die "Tar inseguro (rutas absolutas o ..): $f"
     run_step "Extrayendo $(basename "$f")" tar -xf "$f" -C "$OUTDIR" --no-same-owner --no-same-permissions
+    run_step "Renombrando extraídos para $(basename "$f")" rename_extracted_for_archive "$f" "$OUTDIR"
     if [[ "$KEEP_ARCHIVES" -eq 0 ]]; then
       run_step "Borrando archive $(basename "$f")" rm -f -- "$f"
     fi
@@ -373,11 +450,11 @@ if [[ "$SKIP_PYTHON" -eq 0 ]]; then
   (
     cd "$OUTDIR"
 
-    run_step "Ejecutando traduccionMuTe.py en *_list.csv (carpeta=.)" \
-      translate_list_csvs_in_cwd
+    run_step "Ejecutando traduccionMuTe.py en CSV shaping (carpeta=.)" \
+      translate_shaping_csvs_in_cwd
 
-    run_step "Borrando CSV originales (*_list.csv)" \
-      delete_list_csvs_in_cwd
+    run_step "Borrando CSV shaping originales (los que empiezan con //)" \
+      delete_shaping_csvs_in_cwd
 
     run_step "Ejecutando unircsv.py (carpeta=.)" \
       "$PYTHON_BIN" "$SCRIPTS_DIR/unircsv.py" -o "$CONCAT_NAME" .

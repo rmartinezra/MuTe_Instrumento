@@ -14,7 +14,12 @@ Entrada (shaping típico):
 
 Salida (MuTe típico):
   time,ch00,ch01,...,ch63
-  2026-02-19 20:21:17.227881816,0,0,...,1
+  2026-02-19 15:21:17.227881816,0,0,...,1
+
+Notas:
+- El header del shaping trae tiempos en UTC. Por defecto este script convierte el
+  timestamp final a hora local de Colombia (America/Bogota) y escribe la columna
+  'time' como datetime *naive* (sin tz) ya en hora local.
 """
 
 import argparse
@@ -52,11 +57,11 @@ def read_shaping_dataframe(path: Path) -> pd.DataFrame:
     return pd.read_csv(path, skiprows=header_idx)
 
 
-def shaping_to_mute(df: pd.DataFrame, start_epoch_ms: int) -> pd.DataFrame:
+def shaping_to_mute(df: pd.DataFrame, start_epoch_ms: int, to_tz: str) -> pd.DataFrame:
     """
     Convierte hits por trigger a wide.
     - 1 fila por Trg_Id
-    - time = Start_Time_Epoch + TStamp_us (us) en UTC (se guarda naive)
+    - time = Start_Time_Epoch + TStamp_us (us) en UTC, convertido a 'to_tz'
     - chXX = conteo de hits en ese canal dentro del trigger
     """
     required = {"TStamp_us", "Trg_Id", "CH_Id"}
@@ -64,13 +69,23 @@ def shaping_to_mute(df: pd.DataFrame, start_epoch_ms: int) -> pd.DataFrame:
     if missing:
         raise ValueError(f"Faltan columnas requeridas en shaping: {sorted(missing)}")
 
-    base = pd.Timestamp(int(start_epoch_ms), unit="ms", tz="UTC")
+    base_utc = pd.Timestamp(int(start_epoch_ms), unit="ms", tz="UTC")
 
     # timestamp por trigger (primer TStamp_us del grupo)
     t_per = df.groupby("Trg_Id")["TStamp_us"].first()
-    times = base + pd.to_timedelta(t_per.values, unit="us")
+    times_utc = base_utc + pd.to_timedelta(t_per.values, unit="us")
 
-    out = pd.DataFrame({"time": times.tz_convert(None).astype("datetime64[ns]")})
+    try:
+        # Convertimos a tz destino y luego quitamos tz (queda naive en hora local)
+        times_local = times_utc.tz_convert(to_tz).tz_localize(None)
+    except Exception as e:
+        raise RuntimeError(
+            f"No pude convertir a tz='{to_tz}'. "
+            "Si tu sistema no tiene tzdata, instala: pip install tzdata. "
+            f"Detalle: {e}"
+        )
+
+    out = pd.DataFrame({"time": times_local.astype("datetime64[ns]")})
     out.index = t_per.index  # index = Trg_Id
 
     # crea columnas ch00..ch63
@@ -107,6 +122,12 @@ def main():
         default=None,
         help="Sobrescribe Start_Time_Epoch (ms) si no está en el header.",
     )
+    ap.add_argument(
+        "--to-tz",
+        type=str,
+        default="America/Bogota",
+        help="Zona horaria destino para la columna time (default: America/Bogota). Usa 'UTC' para dejarlo en UTC.",
+    )
     args = ap.parse_args()
 
     in_path = Path(args.input)
@@ -123,7 +144,7 @@ def main():
         epoch_ms = int(meta["Start_Time_Epoch"])
 
     df = read_shaping_dataframe(in_path)
-    out = shaping_to_mute(df, epoch_ms)
+    out = shaping_to_mute(df, epoch_ms, args.to_tz)
 
     out_path = Path(args.output) if args.output else in_path.with_name(in_path.stem + "_as_MuTe.csv")
     out.to_csv(out_path, index=False)
