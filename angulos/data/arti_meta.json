@@ -1,0 +1,8 @@
+{
+  "assumption": "ARTI CSV rows are muons crossing a horizontal reference plane of area A_ref during \u0394t.",
+  "A_ref_m2": 1.0,
+  "dt_s": 3600.0,
+  "theta_bin_deg": 1.0,
+  "mu_bins": 50,
+  "note": "If ARTI output is normalized differently, update A_ref and/or dt accordingly."
+}

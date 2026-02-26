@@ -1,0 +1,14 @@
+{
+  "method": "MC over top-plane position and direction uniform in solid angle",
+  "A_top_m2": 0.36,
+  "theta_max_deg": 70.0,
+  "Omega_sr": 4.134209367876287,
+  "nsamp": 5000000,
+  "dt_det_s": 3600.0,
+  "geometry": {
+    "N": 15,
+    "a_cm": 4.0,
+    "d_cm": 30.0
+  },
+  "I_definition": "perpendicular area (dA_perp = cos\u03b8 dA_horiz)"
+}
