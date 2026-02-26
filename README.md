@@ -3,7 +3,7 @@
 Scripts para **procesamiento y diagnóstico** de datos del detector **MuTe 2.1** en CSV.
 
 Incluye:
-- Conversión de salidas CAEN Janus/FERS en modo **shaping** (hits por trigger) → formato MuTe **wide** (`time + ch00..ch63`).
+- Conversión de salidas CAEN Janus/FERS en modo **spectroscopy** (hits por trigger) → formato MuTe **wide** (`time + ch00..ch63`).
 - Concatenación eficiente de múltiples CSV (streaming, sin cargar todo en RAM).
 - Filtro de **coincidencias 2-fold y 4-fold** con **validación binaria (0/1)**.
 - Análisis unificado:
