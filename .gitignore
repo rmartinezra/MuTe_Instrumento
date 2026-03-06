@@ -4,3 +4,5 @@ datos/
 datos/
 atenuacion/datos/
 entorno/datos/
+entorno/archivo_concatenado_cuentas.csv
+entorno/archivo_concatenado_coinc4.csv
