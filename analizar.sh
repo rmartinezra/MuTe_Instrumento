@@ -38,8 +38,8 @@ echo
 # "$PYTHON" "$MODDIR/angulo_derecho.py" "$CSV"
 # echo
 
-echo "=== angulo_volteado.py ==="
-"$PYTHON" "$MODDIR/angulo_volteado.py" "$CSV"
+echo "=== angulo.py ==="
+"$PYTHON" "$MODDIR/angulo.py" "$CSV"
 echo
 
 echo "OK: pipeline terminado."

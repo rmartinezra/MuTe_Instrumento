@@ -11,11 +11,15 @@ CSV de entrada, con el mismo criterio de tasaV1:
   <carpeta_del_csv>/graficas_<nombre_del_csv_sin_extension>/
 
 Notas importantes:
-  - Para el analisis de tasa, por defecto SOLO se usan los canales ch1..ch60
-    (exactamente 60 canales, contiguos). Esto cumple tu requisito de que
-    los plots "de canales e histograma" consideren 1..60.
-  - Para coincidencias se mantiene el comportamiento de soportar 60 o 64,
-    dependiendo de lo que exista en el archivo.
+  - Para el analisis de tasa, por defecto SOLO se usan los canales fisicos:
+    Panel 1: ch1..ch30
+    Panel 2: ch32..ch61
+    (se excluye ch31)
+  - Para coincidencias se usa la misma geometria fisica anterior:
+    P1 = (1..15)x(16..30), P2 = (32..46)x(47..61)
+  - Los heatmaps individuales de Panel 1 y Panel 2 se guardan con la misma
+    escala de color dentro de cada metrica, para que la comparacion visual
+    sea directa.
 """
 
 from __future__ import annotations
@@ -64,6 +68,22 @@ def _select_contiguous_channels(num2name: dict[int, str], start: int, n: int) ->
             f"Faltantes (primeros 20): {missing[:20]}"
         )
     return [num2name[x] for x in want]
+
+
+def _select_explicit_channel_numbers(num2name: dict[int, str], numbers: list[int]) -> list[str]:
+    """Selecciona una lista explicita de numeros de canal, preservando el orden dado."""
+    missing = [n for n in numbers if n not in num2name]
+    if missing:
+        raise ValueError(
+            "No pude construir la lista explicita de canales. "
+            f"Faltantes (primeros 20): {missing[:20]}"
+        )
+    return [num2name[n] for n in numbers]
+
+
+def _default_physical_channel_numbers() -> list[int]:
+    """Canales fisicos usados por defecto: P1=1..30, P2=32..61 (excluye 31)."""
+    return list(range(1, 31)) + list(range(32, 62))
 
 
 def _select_channel_list_for_coincidences(num2name: dict[int, str], channels_start: int) -> list[str]:
@@ -140,7 +160,7 @@ def _acumular_cps_y_multiplicidad(
         active_per_event = np.count_nonzero(arr > 0.0, axis=1).astype(np.int64)
         multiplicity_counts += np.bincount(active_per_event, minlength=n_canales + 1)
 
-        chunk["sec"] = chunk["time"].dt.floor("S")
+        chunk["sec"] = chunk["time"].dt.floor("s")
         grouped = chunk.groupby("sec")[canales].sum()
         cps_global = grouped if cps_global is None else cps_global.add(grouped, fill_value=0)
 
@@ -149,7 +169,7 @@ def _acumular_cps_y_multiplicidad(
     if cps_global is None:
         raise ValueError("No data accumulated. Empty CSV or no valid 'time' column?")
 
-    cps_global = cps_global.sort_index().asfreq("1S", fill_value=0).astype("float32")
+    cps_global = cps_global.sort_index().asfreq("1s", fill_value=0).astype("float32")
     return cps_global, multiplicity_counts, first_time, last_time
 
 
@@ -249,12 +269,17 @@ def run_rate_analysis(
     rolling_window_s: int,
     chunksize: int,
     no_plots: bool,
+    use_physical_layout: bool,
 ):
-    """Ejecuta analisis de tasa usando SOLO ch<channels_start>..ch<channels_start+rate_n_channels-1>."""
+    """Ejecuta analisis de tasa usando la seleccion de canales pedida."""
 
     header_cols = list(pd.read_csv(in_path, nrows=0).columns)
     num2name = _extract_channels(header_cols)
-    canales = _select_contiguous_channels(num2name, channels_start, rate_n_channels)
+
+    if use_physical_layout:
+        canales = _select_explicit_channel_numbers(num2name, _default_physical_channel_numbers())
+    else:
+        canales = _select_contiguous_channels(num2name, channels_start, rate_n_channels)
 
     base = in_path.stem
     cps, multiplicity_counts, tmin, tmax = _acumular_cps_y_multiplicidad(
@@ -334,16 +359,22 @@ def _save_heatmap(
     title: str,
     outpath: Path,
     center: float | None = None,
+    vmin: float | None = None,
+    vmax: float | None = None,
 ):
     plt.figure(figsize=(10, 8))
     if center is None:
-        im = plt.imshow(M, aspect="auto")
+        im = plt.imshow(M, aspect="auto", vmin=vmin, vmax=vmax)
     else:
         from matplotlib.colors import TwoSlopeNorm
 
-        vmin = np.nanmin(M)
-        vmax = np.nanmax(M)
-        im = plt.imshow(M, aspect="auto", norm=TwoSlopeNorm(vmin=vmin, vcenter=center, vmax=vmax))
+        finite = np.isfinite(M)
+        if not np.any(finite):
+            im = plt.imshow(M, aspect="auto", vmin=vmin, vmax=vmax)
+        else:
+            vvmin = np.nanmin(M) if vmin is None else vmin
+            vvmax = np.nanmax(M) if vmax is None else vmax
+            im = plt.imshow(M, aspect="auto", norm=TwoSlopeNorm(vmin=vvmin, vcenter=center, vmax=vvmax))
 
     plt.colorbar(im)
     plt.xticks(np.arange(len(xlabels)), xlabels, rotation=90)
@@ -354,6 +385,33 @@ def _save_heatmap(
     plt.close()
 
 
+def _finite_global_limits(*arrays: np.ndarray) -> tuple[float | None, float | None]:
+    vals = []
+    for arr in arrays:
+        arr = np.asarray(arr)
+        finite = arr[np.isfinite(arr)]
+        if finite.size:
+            vals.append(finite)
+    if not vals:
+        return None, None
+    joined = np.concatenate(vals)
+    return float(np.min(joined)), float(np.max(joined))
+
+
+def _symmetric_limits_about(center: float, *arrays: np.ndarray) -> tuple[float | None, float | None]:
+    vals = []
+    for arr in arrays:
+        arr = np.asarray(arr)
+        finite = arr[np.isfinite(arr)]
+        if finite.size:
+            vals.append(finite)
+    if not vals:
+        return None, None
+    joined = np.concatenate(vals)
+    radius = float(np.max(np.abs(joined - center)))
+    return center - radius, center + radius
+
+
 def run_coincidence_analysis(
     in_path: Path,
     out_dir: Path,
@@ -362,27 +420,38 @@ def run_coincidence_analysis(
     engine: str,
     channels_start: int,
     no_plots: bool,
+    use_physical_layout: bool,
 ):
     """Ejecuta el analisis de coincidencias (activacion) y guarda todo en out_dir."""
 
     header_cols = list(pd.read_csv(in_path, nrows=0).columns)
     num2name = _extract_channels(header_cols)
-    ch_columns = _select_channel_list_for_coincidences(num2name, channels_start)
-    n_ch = len(ch_columns)
 
-    # Paneles por POSICION
-    if n_ch == 60:
+    if use_physical_layout:
+        ch_columns = _select_explicit_channel_numbers(num2name, _default_physical_channel_numbers())
+        n_ch = len(ch_columns)
         g = 15
         s_p1g1 = slice(0, g)
         s_p1g2 = slice(g, 2 * g)
         s_p2g1 = slice(2 * g, 3 * g)
         s_p2g2 = slice(3 * g, 4 * g)
     else:
-        g = 16
-        s_p1g1 = slice(0, g)
-        s_p1g2 = slice(g, 2 * g)
-        s_p2g1 = slice(2 * g, 3 * g)
-        s_p2g2 = slice(3 * g, 4 * g)
+        ch_columns = _select_channel_list_for_coincidences(num2name, channels_start)
+        n_ch = len(ch_columns)
+
+        # Paneles por POSICION
+        if n_ch == 60:
+            g = 15
+            s_p1g1 = slice(0, g)
+            s_p1g2 = slice(g, 2 * g)
+            s_p2g1 = slice(2 * g, 3 * g)
+            s_p2g2 = slice(3 * g, 4 * g)
+        else:
+            g = 16
+            s_p1g1 = slice(0, g)
+            s_p1g2 = slice(g, 2 * g)
+            s_p2g1 = slice(2 * g, 3 * g)
+            s_p2g2 = slice(3 * g, 4 * g)
 
     coinc1 = np.zeros((g, g), dtype=np.int64)
     coinc2 = np.zeros((g, g), dtype=np.int64)
@@ -456,19 +525,27 @@ def run_coincidence_analysis(
     panel2_g1 = ch_columns[s_p2g1]
     panel2_g2 = ch_columns[s_p2g2]
 
+    sub_counts_p1 = C[0:g, g:2 * g]
+    sub_counts_p2 = C[2 * g:3 * g, 3 * g:4 * g]
+    counts_vmin, counts_vmax = _finite_global_limits(sub_counts_p1, sub_counts_p2)
+
     _save_heatmap(
-        C[0:g, g:2 * g],
+        sub_counts_p1,
         panel1_g2,
         panel1_g1,
         f"Coincidences (Panel 1) - {in_path.stem}",
         out_dir / "heatmap_coincidencias_panel1.png",
+        vmin=counts_vmin,
+        vmax=counts_vmax,
     )
     _save_heatmap(
-        C[2 * g:3 * g, 3 * g:4 * g],
+        sub_counts_p2,
         panel2_g2,
         panel2_g1,
         f"Coincidences (Panel 2) - {in_path.stem}",
         out_dir / "heatmap_coincidencias_panel2.png",
+        vmin=counts_vmin,
+        vmax=counts_vmax,
     )
 
     positive = C[C > 0]
@@ -485,19 +562,27 @@ def run_coincidence_analysis(
     log_counts = np.log10(C.astype(np.float64) + 1.0)
     pd.DataFrame(log_counts, index=ch_columns, columns=ch_columns).to_csv(out_dir / "coincidencias_log10_counts.csv")
 
+    sub_log_p1 = log_counts[0:g, g:2 * g]
+    sub_log_p2 = log_counts[2 * g:3 * g, 3 * g:4 * g]
+    log_vmin, log_vmax = _finite_global_limits(sub_log_p1, sub_log_p2)
+
     _save_heatmap(
-        log_counts[0:g, g:2 * g],
+        sub_log_p1,
         panel1_g2,
         panel1_g1,
         f"log10(count + 1) (Panel 1) - {in_path.stem}",
         out_dir / "heatmap_coincidencias_log_panel1.png",
+        vmin=log_vmin,
+        vmax=log_vmax,
     )
     _save_heatmap(
-        log_counts[2 * g:3 * g, 3 * g:4 * g],
+        sub_log_p2,
         panel2_g2,
         panel2_g1,
         f"log10(count + 1) (Panel 2) - {in_path.stem}",
         out_dir / "heatmap_coincidencias_log_panel2.png",
+        vmin=log_vmin,
+        vmax=log_vmax,
     )
 
     ratio = np.full_like(C, np.nan, dtype=np.float64)
@@ -508,6 +593,9 @@ def run_coincidence_analysis(
     pd.DataFrame(log_ratio, index=ch_columns, columns=ch_columns).to_csv(out_dir / "coincidencias_log10_rel_mean.csv")
 
     sub1 = log_ratio[0:g, g:2 * g]
+    sub2 = log_ratio[2 * g:3 * g, 3 * g:4 * g]
+    rel_vmin, rel_vmax = _symmetric_limits_about(0.0, sub1, sub2)
+
     if np.isfinite(sub1).any():
         _save_heatmap(
             sub1,
@@ -516,9 +604,10 @@ def run_coincidence_analysis(
             f"log10(C / mean) (Panel 1) - {in_path.stem}",
             out_dir / "heatmap_log10_rel_mean_panel1.png",
             center=0.0,
+            vmin=rel_vmin,
+            vmax=rel_vmax,
         )
 
-    sub2 = log_ratio[2 * g:3 * g, 3 * g:4 * g]
     if np.isfinite(sub2).any():
         _save_heatmap(
             sub2,
@@ -527,6 +616,8 @@ def run_coincidence_analysis(
             f"log10(C / mean) (Panel 2) - {in_path.stem}",
             out_dir / "heatmap_log10_rel_mean_panel2.png",
             center=0.0,
+            vmin=rel_vmin,
+            vmax=rel_vmax,
         )
 
 
@@ -537,7 +628,7 @@ def run_coincidence_analysis(
 def main() -> int:
     ap = argparse.ArgumentParser(
         description=(
-            "Analisis unificado: tasa/estabilidad por canal (ch1..ch60) + coincidencias por activacion (60/64). "
+            "Analisis unificado: tasa/estabilidad por canal + coincidencias por activacion. "
             "Todas las salidas se guardan en <folder_csv>/graficas_<stem>/"
         )
     )
@@ -546,6 +637,18 @@ def main() -> int:
     # Controles generales
     ap.add_argument("--only", choices=["all", "rate", "coinc"], default="all", help="Ejecutar solo una parte")
     ap.add_argument("--no-plots", action="store_true", help="No generar PNGs (solo CSVs)")
+    ap.add_argument(
+        "--use-physical-layout",
+        action="store_true",
+        default=True,
+        help="Usa P1=ch1..ch30 y P2=ch32..ch61 (por defecto activo)",
+    )
+    ap.add_argument(
+        "--no-physical-layout",
+        dest="use_physical_layout",
+        action="store_false",
+        help="Vuelve al esquema contiguo original",
+    )
 
     # Parametros de RATE
     ap.add_argument("--rate-chunksize", type=int, default=200_000, help="Chunk size para tasa (streaming)")
@@ -554,13 +657,13 @@ def main() -> int:
         "--rate-channels-start",
         type=int,
         default=1,
-        help="Canal inicial para tasa. Por defecto 1 => usa ch1..ch60",
+        help="Canal inicial para tasa. Solo se usa si activas --no-physical-layout",
     )
     ap.add_argument(
         "--rate-n-channels",
         type=int,
         default=60,
-        help="Numero de canales para tasa. Por defecto 60 (solo ch1..ch60)",
+        help="Numero de canales para tasa. Solo se usa si activas --no-physical-layout",
     )
 
     # Parametros de COINC
@@ -588,6 +691,7 @@ def main() -> int:
             rolling_window_s=args.ventana_rolling,
             chunksize=args.rate_chunksize,
             no_plots=args.no_plots,
+            use_physical_layout=args.use_physical_layout,
         )
 
     if args.only in ("all", "coinc"):
@@ -599,6 +703,7 @@ def main() -> int:
             engine=args.engine,
             channels_start=args.channels_start,
             no_plots=args.no_plots,
+            use_physical_layout=args.use_physical_layout,
         )
 
     print(f"Listo. Salidas en: {out_dir}")

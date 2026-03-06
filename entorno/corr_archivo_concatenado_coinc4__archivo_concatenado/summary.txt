@@ -1,0 +1,15 @@
+sensor   : /home/simulaciones/rafael/MuTe_Instrumento/entorno/datos/archivo_concatenado.csv
+conteos  : /home/simulaciones/rafael/MuTe_Instrumento/entorno/archivo_concatenado_coinc4.csv
+dt       : 1min
+rolling  : 10min
+overlap  : 2026-03-02 17:54:00 -> 2026-03-05 11:49:00
+
+Cuentas/min vs Temperatura (rolling median):
+  Pearson r : -0.791291
+  Fit       : y = 738.473 + -13.8059 x
+  R^2       : 0.626141
+
+Cuentas/min vs Presión (rolling median):
+  Pearson r : 0.228024
+  Fit       : y = -7877.54 + 9.16245 x
+  R^2       : 0.051995
