@@ -1,0 +1,340 @@
+[2026-03-26 11:19:20] sshpass detectado y SSHPASS seteado: usando sshpass -e.
+[2026-03-26 11:19:20] Config:
+  user@host    : martinezr@10.1.157.94
+  remote dir   : /share/CACHEDEV1_DATA/data/mute
+  pattern name : MUTE_MACH1_20260325*.tar.xz
+  scripts dir  : /home/simulaciones/rafael/MuTe_Instrumento/modulos
+  traduccion   : /home/simulaciones/rafael/MuTe_Instrumento/modulos/traduccionMuTe.py
+  outdir       : /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026
+
+[2026-03-26 11:19:20] ==> Abriendo conexión SSH multiplexada (pedirá clave solo una vez)
+[2026-03-26 11:19:20] ==> Chequeando acceso remoto (ssh) y listando archivos
+[2026-03-26 11:19:20] Archivos remotos encontrados: 24
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_21h49m41s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_10h49m12s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_06h49m01s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_23h49m46s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_01h48m50s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_17h49m31s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_20h49m38s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_22h49m43s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_07h49m04s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_14h49m23s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_00h48m48s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_19h49m35s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_05h48m59s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_08h49m07s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_12h49m17s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_16h49m28s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_09h49m10s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_04h48m58s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_11h49m14s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_18h49m33s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_13h49m20s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_03h48m55s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_02h48m52s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] Ya existe local: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_15h49m26s.tar.xz (usa --force para sobreescribir). Omito.
+[2026-03-26 11:19:20] ==> Extrayendo MUTE_MACH1_20260325_21h49m41s.tar.xz
+[2026-03-26 11:19:20] <== OK: Extrayendo MUTE_MACH1_20260325_21h49m41s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:20] ==> Renombrando extraídos para MUTE_MACH1_20260325_21h49m41s.tar.xz
+[2026-03-26 11:19:20] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_21h49m41s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_21h49m41s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_21h49m41s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_21h49m41s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_21h49m41s.tar.xz (elapsed 00:00:01)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_10h49m12s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_10h49m12s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_10h49m12s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_10h49m12s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_10h49m12s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_10h49m12s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_10h49m12s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_10h49m12s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_06h49m01s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_06h49m01s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_06h49m01s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_06h49m01s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_06h49m01s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_06h49m01s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_06h49m01s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_06h49m01s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_23h49m46s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_23h49m46s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_23h49m46s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_23h49m46s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_23h49m46s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_23h49m46s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_23h49m46s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_23h49m46s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_01h48m50s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_01h48m50s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_01h48m50s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_01h48m50s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_01h48m50s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_01h48m50s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_01h48m50s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_01h48m50s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_17h49m31s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_17h49m31s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_17h49m31s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_17h49m31s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_17h49m31s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_17h49m31s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_17h49m31s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_17h49m31s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_20h49m38s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_20h49m38s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_20h49m38s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_20h49m38s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_20h49m38s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_20h49m38s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_20h49m38s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_20h49m38s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_22h49m43s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_22h49m43s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_22h49m43s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_22h49m43s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_22h49m43s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_22h49m43s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_22h49m43s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_22h49m43s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_07h49m04s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_07h49m04s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_07h49m04s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_07h49m04s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_07h49m04s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_07h49m04s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_07h49m04s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_07h49m04s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_14h49m23s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_14h49m23s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_14h49m23s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_14h49m23s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_14h49m23s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_14h49m23s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_14h49m23s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_14h49m23s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_00h48m48s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_00h48m48s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_00h48m48s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_00h48m48s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_00h48m48s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_00h48m48s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_00h48m48s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_00h48m48s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_19h49m35s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_19h49m35s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_19h49m35s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_19h49m35s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_19h49m35s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_19h49m35s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_19h49m35s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_19h49m35s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_05h48m59s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_05h48m59s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_05h48m59s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_05h48m59s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_05h48m59s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_05h48m59s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_05h48m59s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_05h48m59s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_08h49m07s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_08h49m07s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_08h49m07s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_08h49m07s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_08h49m07s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_08h49m07s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_08h49m07s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_08h49m07s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Extrayendo MUTE_MACH1_20260325_12h49m17s.tar.xz
+[2026-03-26 11:19:21] <== OK: Extrayendo MUTE_MACH1_20260325_12h49m17s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:21] ==> Renombrando extraídos para MUTE_MACH1_20260325_12h49m17s.tar.xz
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_12h49m17s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_12h49m17s.csv
+[2026-03-26 11:19:21] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_12h49m17s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_12h49m17s.txt
+[2026-03-26 11:19:21] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_12h49m17s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_16h49m28s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_16h49m28s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_16h49m28s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_16h49m28s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_16h49m28s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_16h49m28s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_16h49m28s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_16h49m28s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_09h49m10s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_09h49m10s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_09h49m10s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_09h49m10s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_09h49m10s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_09h49m10s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_09h49m10s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_09h49m10s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_04h48m58s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_04h48m58s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_04h48m58s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_04h48m58s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_04h48m58s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_04h48m58s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_04h48m58s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_04h48m58s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_11h49m14s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_11h49m14s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_11h49m14s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_11h49m14s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_11h49m14s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_11h49m14s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_11h49m14s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_11h49m14s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_18h49m33s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_18h49m33s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_18h49m33s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_18h49m33s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_18h49m33s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_18h49m33s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_18h49m33s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_18h49m33s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_13h49m20s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_13h49m20s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_13h49m20s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_13h49m20s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_13h49m20s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_13h49m20s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_13h49m20s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_13h49m20s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_03h48m55s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_03h48m55s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_03h48m55s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_03h48m55s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_03h48m55s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_03h48m55s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_03h48m55s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_03h48m55s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_02h48m52s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_02h48m52s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_02h48m52s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_02h48m52s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_02h48m52s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_02h48m52s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_02h48m52s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_02h48m52s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Extrayendo MUTE_MACH1_20260325_15h49m26s.tar.xz
+[2026-03-26 11:19:22] <== OK: Extrayendo MUTE_MACH1_20260325_15h49m26s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Renombrando extraídos para MUTE_MACH1_20260325_15h49m26s.tar.xz
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_15h49m26s.csv (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_15h49m26s.csv
+[2026-03-26 11:19:22] Ya existe: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_15h49m26s.txt (usa --force). No renombro /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/MUTE_MACH1_20260325_15h49m26s.txt
+[2026-03-26 11:19:22] <== OK: Renombrando extraídos para MUTE_MACH1_20260325_15h49m26s.tar.xz (elapsed 00:00:00)
+[2026-03-26 11:19:22] ==> Ejecutando traduccionMuTe.py en CSV shaping (carpeta=.)
+[2026-03-26 11:19:22]   -> traduccionMuTe.py: MUTE_MACH1_20260325_00h48m48s.csv
+[OK] Escribí: MUTE_MACH1_20260325_00h48m48s_as_MuTe.csv  (rows=832, cols=65)
+[2026-03-26 11:19:22]   -> traduccionMuTe.py: MUTE_MACH1_20260325_01h48m50s.csv
+[OK] Escribí: MUTE_MACH1_20260325_01h48m50s_as_MuTe.csv  (rows=874, cols=65)
+[2026-03-26 11:19:23]   -> traduccionMuTe.py: MUTE_MACH1_20260325_02h48m52s.csv
+[OK] Escribí: MUTE_MACH1_20260325_02h48m52s_as_MuTe.csv  (rows=836, cols=65)
+[2026-03-26 11:19:24]   -> traduccionMuTe.py: MUTE_MACH1_20260325_03h48m55s.csv
+[OK] Escribí: MUTE_MACH1_20260325_03h48m55s_as_MuTe.csv  (rows=898, cols=65)
+[2026-03-26 11:19:24]   -> traduccionMuTe.py: MUTE_MACH1_20260325_04h48m58s.csv
+[OK] Escribí: MUTE_MACH1_20260325_04h48m58s_as_MuTe.csv  (rows=920, cols=65)
+[2026-03-26 11:19:25]   -> traduccionMuTe.py: MUTE_MACH1_20260325_05h48m59s.csv
+[OK] Escribí: MUTE_MACH1_20260325_05h48m59s_as_MuTe.csv  (rows=940, cols=65)
+[2026-03-26 11:19:26]   -> traduccionMuTe.py: MUTE_MACH1_20260325_06h49m01s.csv
+[OK] Escribí: MUTE_MACH1_20260325_06h49m01s_as_MuTe.csv  (rows=868, cols=65)
+[2026-03-26 11:19:26]   -> traduccionMuTe.py: MUTE_MACH1_20260325_07h49m04s.csv
+[OK] Escribí: MUTE_MACH1_20260325_07h49m04s_as_MuTe.csv  (rows=770, cols=65)
+[2026-03-26 11:19:27]   -> traduccionMuTe.py: MUTE_MACH1_20260325_08h49m07s.csv
+[OK] Escribí: MUTE_MACH1_20260325_08h49m07s_as_MuTe.csv  (rows=686, cols=65)
+[2026-03-26 11:19:28]   -> traduccionMuTe.py: MUTE_MACH1_20260325_09h49m10s.csv
+[OK] Escribí: MUTE_MACH1_20260325_09h49m10s_as_MuTe.csv  (rows=632, cols=65)
+[2026-03-26 11:19:28]   -> traduccionMuTe.py: MUTE_MACH1_20260325_10h49m12s.csv
+[OK] Escribí: MUTE_MACH1_20260325_10h49m12s_as_MuTe.csv  (rows=658, cols=65)
+[2026-03-26 11:19:29]   -> traduccionMuTe.py: MUTE_MACH1_20260325_11h49m14s.csv
+[OK] Escribí: MUTE_MACH1_20260325_11h49m14s_as_MuTe.csv  (rows=634, cols=65)
+[2026-03-26 11:19:30]   -> traduccionMuTe.py: MUTE_MACH1_20260325_12h49m17s.csv
+[OK] Escribí: MUTE_MACH1_20260325_12h49m17s_as_MuTe.csv  (rows=654, cols=65)
+[2026-03-26 11:19:30]   -> traduccionMuTe.py: MUTE_MACH1_20260325_13h49m20s.csv
+[OK] Escribí: MUTE_MACH1_20260325_13h49m20s_as_MuTe.csv  (rows=618, cols=65)
+[2026-03-26 11:19:31]   -> traduccionMuTe.py: MUTE_MACH1_20260325_14h49m23s.csv
+[OK] Escribí: MUTE_MACH1_20260325_14h49m23s_as_MuTe.csv  (rows=703, cols=65)
+[2026-03-26 11:19:31]   -> traduccionMuTe.py: MUTE_MACH1_20260325_15h49m26s.csv
+[OK] Escribí: MUTE_MACH1_20260325_15h49m26s_as_MuTe.csv  (rows=719, cols=65)
+[2026-03-26 11:19:32]   -> traduccionMuTe.py: MUTE_MACH1_20260325_16h49m28s.csv
+[OK] Escribí: MUTE_MACH1_20260325_16h49m28s_as_MuTe.csv  (rows=756, cols=65)
+[2026-03-26 11:19:33]   -> traduccionMuTe.py: MUTE_MACH1_20260325_17h49m31s.csv
+[OK] Escribí: MUTE_MACH1_20260325_17h49m31s_as_MuTe.csv  (rows=730, cols=65)
+[2026-03-26 11:19:33]   -> traduccionMuTe.py: MUTE_MACH1_20260325_18h49m33s.csv
+[OK] Escribí: MUTE_MACH1_20260325_18h49m33s_as_MuTe.csv  (rows=770, cols=65)
+[2026-03-26 11:19:34]   -> traduccionMuTe.py: MUTE_MACH1_20260325_19h49m35s.csv
+[OK] Escribí: MUTE_MACH1_20260325_19h49m35s_as_MuTe.csv  (rows=807, cols=65)
+[2026-03-26 11:19:35]   -> traduccionMuTe.py: MUTE_MACH1_20260325_20h49m38s.csv
+[OK] Escribí: MUTE_MACH1_20260325_20h49m38s_as_MuTe.csv  (rows=826, cols=65)
+[2026-03-26 11:19:35]   -> traduccionMuTe.py: MUTE_MACH1_20260325_21h49m41s.csv
+[OK] Escribí: MUTE_MACH1_20260325_21h49m41s_as_MuTe.csv  (rows=817, cols=65)
+[2026-03-26 11:19:36]   -> traduccionMuTe.py: MUTE_MACH1_20260325_22h49m43s.csv
+[OK] Escribí: MUTE_MACH1_20260325_22h49m43s_as_MuTe.csv  (rows=796, cols=65)
+[2026-03-26 11:19:36]   -> traduccionMuTe.py: MUTE_MACH1_20260325_23h49m46s.csv
+[OK] Escribí: MUTE_MACH1_20260325_23h49m46s_as_MuTe.csv  (rows=838, cols=65)
+[2026-03-26 11:19:37] <== OK: Ejecutando traduccionMuTe.py en CSV shaping (carpeta=.) (elapsed 00:00:15)
+[2026-03-26 11:19:37] ==> Borrando CSV shaping originales (los que empiezan con //)
+[2026-03-26 11:19:37] Borré 24 CSV shaping (si había).
+[2026-03-26 11:19:37] <== OK: Borrando CSV shaping originales (los que empiezan con //) (elapsed 00:00:00)
+[2026-03-26 11:19:37] ==> Ejecutando unircsv.py (carpeta=.)
+Se encontraron 25 archivos CSV.
+Escribiendo salida en: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado.csv
+[1/25] MUTE_MACH1_20260325_00h48m48s_as_MuTe.csv
+[2/25] MUTE_MACH1_20260325_01h48m50s_as_MuTe.csv
+[3/25] MUTE_MACH1_20260325_02h48m52s_as_MuTe.csv
+[4/25] MUTE_MACH1_20260325_03h48m55s_as_MuTe.csv
+[5/25] MUTE_MACH1_20260325_04h48m58s_as_MuTe.csv
+[6/25] MUTE_MACH1_20260325_05h48m59s_as_MuTe.csv
+[7/25] MUTE_MACH1_20260325_06h49m01s_as_MuTe.csv
+[8/25] MUTE_MACH1_20260325_07h49m04s_as_MuTe.csv
+[9/25] MUTE_MACH1_20260325_08h49m07s_as_MuTe.csv
+[10/25] MUTE_MACH1_20260325_09h49m10s_as_MuTe.csv
+[11/25] MUTE_MACH1_20260325_10h49m12s_as_MuTe.csv
+[12/25] MUTE_MACH1_20260325_11h49m14s_as_MuTe.csv
+[13/25] MUTE_MACH1_20260325_12h49m17s_as_MuTe.csv
+[14/25] MUTE_MACH1_20260325_13h49m20s_as_MuTe.csv
+[15/25] MUTE_MACH1_20260325_14h49m23s_as_MuTe.csv
+[16/25] MUTE_MACH1_20260325_15h49m26s_as_MuTe.csv
+[17/25] MUTE_MACH1_20260325_16h49m28s_as_MuTe.csv
+[18/25] MUTE_MACH1_20260325_17h49m31s_as_MuTe.csv
+[19/25] MUTE_MACH1_20260325_18h49m33s_as_MuTe.csv
+[20/25] MUTE_MACH1_20260325_19h49m35s_as_MuTe.csv
+[21/25] MUTE_MACH1_20260325_20h49m38s_as_MuTe.csv
+[22/25] MUTE_MACH1_20260325_21h49m41s_as_MuTe.csv
+[23/25] MUTE_MACH1_20260325_22h49m43s_as_MuTe.csv
+[24/25] MUTE_MACH1_20260325_23h49m46s_as_MuTe.csv
+[25/25] archivo_concatenado_coinc4.csv
+Concatenación finalizada.
+[2026-03-26 11:19:37] <== OK: Ejecutando unircsv.py (carpeta=.) (elapsed 00:00:00)
+[2026-03-26 11:19:37] ==> Ordenando temporalmente archivo_concatenado.csv por columna time
+[2026-03-26 11:19:37] <== OK: Ordenando temporalmente archivo_concatenado.csv por columna time (elapsed 00:00:00)
+[2026-03-26 11:19:37] ==> Ejecutando filtro_coincidencias.py (input=archivo_concatenado.csv)
+Input: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado.csv
+Rows read: 23029
+Rows dropped (non-binary !=0/1) AFTER zeroing: 0
+Zeroing: OFF (no --zero-ch provided)
+Coinc2: OFF (use --write-coinc2 to enable)
+Coinc4 kept: 8894 -> /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4.csv
+Hit definition: (value == 1) only.
+strict_4fold: OFF
+[2026-03-26 11:19:38] <== OK: Ejecutando filtro_coincidencias.py (input=archivo_concatenado.csv) (elapsed 00:00:01)
+
+[2026-03-26 11:19:38] ✅ Pipeline completo. Tiempo total: 00:00:18
+[2026-03-26 11:19:38] Outdir: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026
+Archivo: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4.csv
+Modulos: /home/simulaciones/rafael/MuTe_Instrumento/modulos
+Python : python3
+
+=== analisis_global.py ===
+Salidas en: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4
+[RATE] Time range in data: 2026-03-25 00:49:04.219083976 to 2026-03-26 00:49:12.878385680
+[RATE] Total seconds in cps: 86409
+[RATE] Channel performance table: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/archivo_concatenado_coinc4_channel_performance.csv
+[RATE] Saved CPS rolling plot: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/archivo_concatenado_coinc4_cps_rolling.png
+[RATE] Saved deviation histogram: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/archivo_concatenado_coinc4_desviacion_media.png
+[RATE] Saved event multiplicity plot: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/archivo_concatenado_coinc4_multiplicidad_eventos.png
+Listo. Salidas en: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4
+
+=== flujo_4fold.py ===
+
+=== Serie temporal coincidencias 4-fold ===
+Archivo           : archivo_concatenado_coinc4.csv
+Intervalo tiempo  : 2026-03-25 00:49:04  ->  2026-03-26 00:49:12
+Tiempo efectivo   : 86408.000 s
+Total coincid.    : 8102
+N segundos (serie): 86409
+Flujo medio       : 0.260454 cnt/s/m^2
+Sigma             : 1.203809 cnt/s/m^2
+Error de la media : 0.004095 cnt/s/m^2
+Figura flujo vs tiempo guardada en: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/flujo_4fold_tiempo.png
+
+=== histograma_4fold.py ===
+
+=== Estadísticas coincidencias 4-fold ===
+Archivo          : archivo_concatenado_coinc4.csv
+Intervalo tiempo : 2026-03-25 00:49:04  ->  2026-03-26 00:49:12
+Tiempo efectivo  : 86408.000 s
+Total coincid.   : 8102
+N segundos usados: 4338
+Flujo medio      : 5.188003 cnt/s/m^2
+Sigma            : 1.817178 cnt/s/m^2
+Error de la media: 0.027590 cnt/s/m^2
+
+Histograma guardado en: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/histograma_flux_4fold.png
+
+=== angulo.py ===
+Filas leídas: 8894
+Eventos usados (4 planos, criterio seleccionado): 8894
+Modo: centroid (permite multihit; centroid por plano).
+Inversión física de Y: sí
+Tilt global en Y: 12.0 deg
+Umbral visual low-count: N < 0 queda en blanco
+PNG ΔxΔy: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/mapa_pixeles_delta_xy.png
+PNG θxθy global: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/mapa_pixeles_theta_deg_global.png
+CSV conteos: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/graficas_archivo_concatenado_coinc4/mapa_pixeles_delta_xy.csv
+
+=== correciones e gifs ===
+Done. Output directory: /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output
+  - /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output/raw_counts_fill.gif
+  - /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output/corrected_fill.gif
+  - /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output/error_fill.gif
+  - /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output/01_raw_counts_final.png
+  - /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output/02_corrected_map_final.png
+  - /home/simulaciones/rafael/MuTe_Instrumento/datos/25032026/archivo_concatenado_coinc4_muography_output/03_error_map_final.png
+
+OK: pipeline terminado.

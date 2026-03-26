@@ -27,11 +27,7 @@ echo "=== analisis_global.py ==="
 echo
 
 echo "=== flujo_4fold.py ==="
-"$PYTHON" "$MODDIR/flujo_4fold.py" "$CSV"
-echo
-
-echo "=== histograma_4fold.py ==="
-"$PYTHON" "$MODDIR/histograma_4fold.py" "$CSV"
+"$PYTHON" "$MODDIR/rolling.py" "$CSV"
 echo
 
 # echo "=== angulo_derecho.py ==="
