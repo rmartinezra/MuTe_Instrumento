@@ -42,4 +42,10 @@ echo "=== angulo.py ==="
 "$PYTHON" "$MODDIR/angulo.py" "$CSV"
 echo
 
+echo "=== correciones e gifs ==="
+"$PYTHON" "$MODDIR/muography_unified_article_gif.py" "$CSV"
+echo
+
+
+
 echo "OK: pipeline terminado."

@@ -28,8 +28,8 @@ except Exception:  # pragma: no cover
 # Grupos por planos: 4 grupos de 15 (ajusta si tu mapping es otro)
 G1 = list(range(1, 16))
 G2 = list(range(16, 31))
-G3 = list(range(31, 46))
-G4 = list(range(46, 61))
+G3 = list(range(32, 47))
+G4 = list(range(47, 62))
 
 
 def _parse_int_list_csv(s: str):

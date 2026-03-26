@@ -6,3 +6,7 @@ atenuacion/datos/
 entorno/datos/
 entorno/archivo_concatenado_cuentas.csv
 entorno/archivo_concatenado_coinc4.csv
+simulaciones/datos
+simulaciones/1horamu.shw
+simulaciones/archivo_concatenado_coinc4.csv
+simulaciones/theta_fit_output/theta_eventos.csv
