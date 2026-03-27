@@ -54,7 +54,7 @@ def main():
 
     parser.add_argument("csv",type=Path)
 
-    parser.add_argument("--time-col",default="index")
+    parser.add_argument("--time-col",default="time")
     parser.add_argument("--rate-col",default="counts_per_min")
     parser.add_argument("--temp-col",default="temp_roll_med")
     parser.add_argument("--pres-col",default="pres_roll_med")
@@ -75,7 +75,8 @@ def main():
 
     a,b,r2=linfit(T,R)
 
-    alpha=b
+    #alpha=b
+    alpha=-2.05
 
     Rcorr=R-alpha*(T-T0)
 
@@ -117,7 +118,7 @@ def main():
     ax[0].legend()
 
     ax[0].grid(True,linestyle="--",alpha=0.5)
-
+    ax[0].set_ylim(0,65)
     # temperatura
 
     ax[1].plot(t,T,color="tab:red",linewidth=1)
